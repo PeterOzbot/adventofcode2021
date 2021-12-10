@@ -110,7 +110,7 @@ fn create_digits(segments: &[u8; 7]) -> [u8; 10] {
     let digit_zero =
         segments[0] | segments[1] | segments[2] | segments[4] | segments[5] | segments[6];
     let digit_one = segments[2] | segments[5];
-    let digit_two = segments[0] | segments[2] | segments[3] | segments[4] | segments[6];;
+    let digit_two = segments[0] | segments[2] | segments[3] | segments[4] | segments[6];
     let digit_three = segments[0] | segments[2] | segments[3] | segments[5] | segments[6];
     let digit_four = segments[1] | segments[2] | segments[3] | segments[5];
     let digit_five = segments[0] | segments[1] | segments[3] | segments[5] | segments[6];
