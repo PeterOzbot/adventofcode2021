@@ -113,7 +113,7 @@ fn increase_energy(octopuses: &mut Vec<Vec<Octopus>>) {
 
 fn process(octopuses: &mut Vec<Vec<Octopus>>) {
     let mut flash_count = 0;
-    for step in 1..=100 {
+    for _ in 1..=100 {
         increase_energy(octopuses);
         flash_count += chain_flash(octopuses);
     }
