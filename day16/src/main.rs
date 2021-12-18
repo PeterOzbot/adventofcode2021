@@ -196,7 +196,6 @@ fn calculate(package: &Package) -> u64 {
         PackageType::GreaterThan => greater_than(&package.value),
         PackageType::LessThan => less_than(&package.value),
         PackageType::EqualTo => equal(&package.value),
-        _ => 0,
     }
 }
 

@@ -1,20 +1,20 @@
-use std::fmt;
+use std::hash::{Hash, Hasher};
 
-pub struct Node {
-    pub value: u64,
-    pub visited: bool,
-    pub distance:u64
+pub struct VisitedNode {
+    pub x: usize,
+    pub y: usize,
 }
 
-impl fmt::Debug for Node {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        let visited_str;
-        if self.visited {
-            visited_str = "+";
-        } else {
-            visited_str = "-";
-        }
+impl PartialEq for VisitedNode {
+    fn eq(&self, other: &Self) -> bool {
+        self.x == other.y && self.y == other.y
+    }
+}
+impl Eq for VisitedNode {}
 
-        write!(f, "{}{}", self.value, visited_str)
+impl Hash for VisitedNode {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        self.x.hash(state);
+        self.y.hash(state);
     }
 }
