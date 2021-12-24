@@ -89,18 +89,18 @@ fn add_right(pair: SnailfishNumber, val: Option<u8>) -> SnailfishNumber {
 fn explode(pair: SnailfishNumber, depth: u8) -> (SnailfishNumber, Option<u8>, Option<u8>, bool) {
     match pair {
         SnailfishNumber::Number(_) => (pair, None, None, false),
-        SnailfishNumber::Pair(a, b) => {
+        SnailfishNumber::Pair(left, right) => {
             if depth >= 4 {
-                match (*a, *b) {
-                    (SnailfishNumber::Number(a), SnailfishNumber::Number(b)) => {
-                        return (SnailfishNumber::Number(0), Some(a), Some(b), true)
+                match (*left, *right) {
+                    (SnailfishNumber::Number(left_number), SnailfishNumber::Number(right_number)) => {
+                        return (SnailfishNumber::Number(0), Some(left_number), Some(right_number), true)
                     }
                     _ => unreachable!(),
                 }
             }
-            let (sub_pair_left, left_ret, left_add, exploded) = explode(*a, depth + 1);
+            let (sub_pair_left, left_ret, left_add, exploded) = explode(*left, depth + 1);
             if exploded {
-                let new_right = add_left(*b, left_add);
+                let new_right = add_left(*right, left_add);
                 (
                     SnailfishNumber::Pair(Box::new(sub_pair_left), Box::new(new_right)),
                     left_ret,
@@ -108,7 +108,7 @@ fn explode(pair: SnailfishNumber, depth: u8) -> (SnailfishNumber, Option<u8>, Op
                     true,
                 )
             } else {
-                let (sub_pair_right, right_add, right_ret, exploded) = explode(*b, depth + 1);
+                let (sub_pair_right, right_add, right_ret, exploded) = explode(*right, depth + 1);
                 let new_left = add_right(sub_pair_left, right_add);
                 (
                     SnailfishNumber::Pair(Box::new(new_left), Box::new(sub_pair_right)),

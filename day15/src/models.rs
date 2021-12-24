@@ -7,7 +7,7 @@ pub struct VisitedNode {
 
 impl PartialEq for VisitedNode {
     fn eq(&self, other: &Self) -> bool {
-        self.x == other.y && self.y == other.y
+        self.x == other.x && self.y == other.y
     }
 }
 impl Eq for VisitedNode {}
